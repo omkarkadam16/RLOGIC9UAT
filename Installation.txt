@@ -1,0 +1,4 @@
+✅ 1. Ensure All Dependencies Are Installed
+Before creating the .exe, ensure your machine has all required libraries installed:
+
+pip install selenium pandas openpyxl webdriver-manager pyinstaller

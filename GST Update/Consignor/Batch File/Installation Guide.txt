@@ -1,0 +1,39 @@
+
+🛠️ Solution: Create a Simple Batch File (.bat)
+Create a new text file.
+Add the following content:
+@echo off
+python gstno_update.py
+pause
+
+Save it as run_script.bat (not .txt).
+Give this file to your clients—they can run it by double-clicking.
+
+
+✅ 1. Install Python (if not installed)
+Download Python from: Python Official Site
+During installation, check the box "Add Python to PATH".
+
+✅ 2. Install Required Python Packages
+After installing Python, they need to install the necessary libraries.
+Ask them to open Command Prompt (cmd) and run:
+
+pip install selenium pandas openpyxl webdriver-manager
+
+selenium → For browser automation
+pandas → To handle Excel files
+openpyxl → For reading/writing Excel
+
+✅ 3. Install Chrome & WebDriver
+Google Chrome must be installed on their system.
+The Chrome version must match the ChromeDriver version.
+To check Chrome version:
+Open Chrome → Go to chrome://settings/help
+Download the matching ChromeDriver from: ChromeDriver Site
+Place chromedriver.exe in a known folder (e.g., C:\WebDrivers\).
+
+✅ 4. Place the Necessary Files Together
+Your client must have: ✔ gstno_update.py (your script)
+✔ selenium_helper.py (if it's a separate file)
+✔ GST.xlsx (Excel file)
+✔ chromedriver.exe (WebDriver)

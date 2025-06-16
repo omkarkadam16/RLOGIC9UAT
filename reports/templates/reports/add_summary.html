@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Summary</title>
+</head>
+<body>
+    <h2>Add Test Summary</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'view_summary' %}">View All Summaries</a>
+</body>
+</html>

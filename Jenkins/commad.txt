@@ -1,0 +1,7 @@
+java -jar jenkins.war --httpPort=9090
+
+http://localhost:9090
+
+cd "C:\Users\user\Desktop\Omkar Kadam_selenium\System Testing\MYSQL\1_Masters\1_Organizational Hierarchy"
+
+python 1_Division.py

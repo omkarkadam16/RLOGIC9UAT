@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Summary</title>
+</head>
+<body>
+    <h2>All Test Summaries</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Month</th>
+            <th>Module Name</th>
+            <th>Passed Test</th>
+            <th>Failed Test</th>
+            <th>Total Test Cases</th>
+        </tr>
+        {% for summary in summaries %}
+        <tr>
+            <td>{{ summary.id }}</td>
+            <td>{{ summary.month }}</td>
+            <td>{{ summary.module_name }}</td>
+            <td>{{ summary.passed_test }}</td>
+            <td>{{ summary.failed_test }}</td>
+            <td>{{ summary.total_test_cases }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'add_summary' %}">Add Summary</a>
+</body>
+</html>

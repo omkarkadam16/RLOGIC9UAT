@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Test Case</title>
+</head>
+<body>
+    <h2>Add Test Case</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'view_test_cases' %}">View All Test Cases</a>
+</body>
+</html>

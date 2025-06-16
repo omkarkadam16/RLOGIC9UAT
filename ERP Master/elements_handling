@@ -1,0 +1,174 @@
+**Selenium Interaction Reusable Methods & Optimizations**
+
+    def setUpClass(cls):
+        cls.driver=webdriver.Chrome(service=Service(r"C:\Users\user\Downloads\WebDrivers\chromedriver.exe"))
+        cls.driver.maximize_window()
+        cls.wait = WebDriverWait(cls.driver, 5)
+
+### **1. Click an Element**
+#### **Method:**
+```python
+    def click_element(self, by, value):
+        self.wait.until(EC.element_to_be_clickable((by, value))).click()
+```
+#### **Usage:**
+```python
+self.click_element(By.LINK_TEXT, "Transportation")
+```
+
+---
+
+### **2. Send Text to an Input Field**
+#### **Method:**
+```python
+    def send_keys(self, by, value, text):
+        self.wait.until(EC.visibility_of_element_located((by, value))).send_keys(text)
+```
+
+---
+
+### **3. Select Dropdown Option**
+#### **Method:**
+```python
+    def select_dropdown(self, by, value, option_text):
+        self.wait.until(EC.visibility_of_element_located((by, value)))
+        dropdown = Select(self.driver.find_element(by, value))
+        dropdown.select_by_visible_text(option_text)
+```
+
+---
+
+### **4. Hover Over an Element**
+#### **Method:**
+```python
+    def hover_over_element(self, by, value):
+        element = self.wait.until(EC.visibility_of_element_located((by, value)))
+        ActionChains(self.driver).move_to_element(element).perform()
+```
+
+---
+
+### **5. Right Click (Context Click)**
+#### **Method:**
+```python
+    def right_click(self, by, value):
+        element = self.wait.until(EC.visibility_of_element_located((by, value)))
+        ActionChains(self.driver).context_click(element).perform()
+```
+
+---
+
+### **6. Drag and Drop**
+#### **Method:**
+```python
+    def drag_and_drop(self, source_by, source_value, target_by, target_value):
+        source = self.wait.until(EC.visibility_of_element_located((source_by, source_value)))
+        target = self.wait.until(EC.visibility_of_element_located((target_by, target_value)))
+        ActionChains(self.driver).drag_and_drop(source, target).perform()
+```
+
+---
+
+### **7. Handle Alerts**
+#### **Method:**
+```python
+    def handle_alert(self, action="accept"):
+        alert = self.wait.until(EC.alert_is_present())
+        if action.lower() == "accept":
+            alert.accept()
+        elif action.lower() == "dismiss":
+            alert.dismiss()
+```
+
+---
+
+### **8. Autocomplete Selection**
+#### **Method:**
+```python
+    def autocomplete_select(self, by, value, text):
+        input_field = self.wait.until(EC.visibility_of_element_located((by, value)))
+        input_field.clear()
+        input_field.send_keys(text)
+        time.sleep(3)
+        suggestions = self.wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "ui-menu-item")))
+        for suggestion in suggestions:
+            if text.upper() in suggestion.text.upper():
+                suggestion.click()
+                return
+        input_field.send_keys(Keys.DOWN)
+        input_field.send_keys(Keys.ENTER)
+```
+
+---
+
+### **9.Click an element with retry logic and JS fallback using while loop.**
+#### **Method:**
+```python
+    def click_element_while_loop(self, by, value, max_attempts=3):
+        attempt = 0
+        element = None
+        """Click an element with retry logic and JS fallback."""
+        while attempt < max_attempts:
+            try:
+                element = self.wait.until(EC.element_to_be_clickable((by, value)))
+                element.click()
+                print(f"Successfully clicked element: {value}")
+                return True
+            except (ex.ElementClickInterceptedException, ex.StaleElementReferenceException, ex.TimeoutException) as e:
+                print(f"Attempt {attempt + 1}: Failed to click element {value} due to {type(e).__name__}. Retrying...")
+                time.sleep(1)
+
+            # JavaScript Click Fallback
+            try:
+                if element:
+                    self.driver.execute_script("arguments[0].click();", element)
+                    print(f"Successfully clicked element using JavaScript: {value}")
+                    return True
+            except ex.JavascriptException as js_error:
+                print(f"Attempt {attempt + 1}: JavaScript click failed due to {type(js_error).__name__}")
+
+            attempt += 1
+
+        print(f"Failed to click element {value} after {max_attempts} attempts.")
+        return False
+
+```
+
+---
+
+### **10. Click an element with retry logic and JS fallback.**
+#### **Method:**
+```python
+    def click_element_JS(self, by, value, retries=2):
+        """Click an element with retry logic and JS fallback."""
+        for attempt in range(retries):
+            try:
+                element = self.wait.until(EC.element_to_be_clickable((by, value)))
+                element.click()
+                return True
+            except (ex.ElementClickInterceptedException, ex.StaleElementReferenceException, ex.TimeoutException):
+                print(f"⚠️ Retrying click for {value}... ({attempt + 1}/{retries})")
+
+        # noinspection PyBroadException
+        try:
+            element = self.driver.find_element(by, value)
+            self.driver.execute_script("arguments[0].click();", element)
+            return True
+        except:
+            print(f"❌ Failed click for {value}")
+            return False
+```
+
+---
+
+### **11. Close Unexpected Popups Dynamically**
+#### **Method:**
+```python
+def close_popups(self):
+    try:
+        close_button = self.driver.find_element(By.CLASS_NAME, "close")
+        close_button.click()
+        print("Closed blocking popup")
+    except:
+        pass  # No popup found
+```

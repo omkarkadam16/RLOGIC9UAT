@@ -1,0 +1,23 @@
+import requests
+import time
+
+API_KEY = "your_2captcha_api_key"
+site_key = "6LeWnXkTAAAAAPoN35Aabc_Example"  # Get the site key from page source
+url = "https://www.google.com/recaptcha/api2/demo"
+
+# Step 1: Request CAPTCHA solution
+captcha_request = requests.get(
+    f"http://2captcha.com/in.php?key={API_KEY}&method=userrecaptcha&googlekey={site_key}&pageurl={url}&json=1"
+)
+captcha_id = captcha_request.json()["request"]
+
+# Step 2: Wait for the solution
+time.sleep(15)  # Allow time for solving
+
+# Step 3: Get the solution
+captcha_response = requests.get(
+    f"http://2captcha.com/res.php?key={API_KEY}&action=get&id={captcha_id}&json=1"
+)
+captcha_solution = captcha_response.json()["request"]
+
+print("CAPTCHA Solved:", captcha_solution)

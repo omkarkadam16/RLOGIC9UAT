@@ -1,0 +1,30 @@
+🛠️ Steps to Create a Standalone .exe File
+✅ 1. Ensure All Dependencies Are Installed
+Before creating the .exe, ensure your machine has all required libraries installed:
+
+pip install selenium pandas openpyxl webdriver-manager pyinstaller
+
+✅ 2. Modify the Script for WebDriver Compatibility
+
+Since webdriver_manager downloads drivers dynamically, it may not work properly in .exe.
+Instead, manually download chromedriver.exe from Chromedriver Download Page.
+Place it inside the same folder as gstno_update.py.
+Update your script:
+
+cls.driver = webdriver.Chrome(service=Service("./chromedriver.exe"), options=chrome_options)
+
+This ensures your .exe works without internet access on the client’s system.
+
+✅ 3. Create .exe Using PyInstaller
+Open Command Prompt (cmd) inside the script folder and run:
+
+pyinstaller --onefile --console UpdateFile.py
+
+--onefile → Bundles everything into a single .exe file.
+--console → Opens the command prompt when running .exe (for logs).
+
+✅ 4. Share the .exe With the Client
+
+Send the generated gstno_update.exe file.
+Also, share chromedriver.exe (keep both in the same folder).
+The client only needs to double-click gstno_update.exe—no installation required! 🎉

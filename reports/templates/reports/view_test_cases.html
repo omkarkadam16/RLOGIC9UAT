@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Cases</title>
+</head>
+<body>
+    <h2>All Test Cases</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Test Data</th>
+            <th>Actual Result</th>
+            <th>Expected Result</th>
+            <th>Status</th>
+            <th>Remark</th>
+        </tr>
+        {% for case in test_cases %}
+        <tr>
+            <td>{{ case.id }}</td>
+            <td>{{ case.description }}</td>
+            <td>{{ case.test_data }}</td>
+            <td>{{ case.actual_result }}</td>
+            <td>{{ case.expected_result }}</td>
+            <td>{{ case.status }}</td>
+            <td>{{ case.remark }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'add_test_case' %}">Add New Test Case</a>
+</body>
+</html>

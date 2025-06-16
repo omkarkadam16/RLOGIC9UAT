@@ -1,0 +1,5 @@
+ I want to generate more detailed test cases for each field in this form using Selenium with Python, and I want them in the following tabular format:
+
+ID | Description | Test Data | Actual Result | Expected Result | Status | Remark
+
+For each field, provide multiple test scenarios (valid inputs, invalid inputs, edge cases like empty input, special characters, character limit if applicable, etc.).

@@ -1,0 +1,59 @@
+Flowchart of the Test Execution
+
+Start
+  │
+  ▼
+Open Browser
+  │
+  ▼
+Navigate to Login Page
+  │
+  ▼
+Enter Username & Password
+  │
+  ▼
+Click Login Button
+  │
+  ▼
+Wait for "Transportation" Menu
+  │
+  ▼
+Click "Transportation"
+  │
+  ▼
+Click "Transportation Master"
+  │
+  ▼
+Click "Common Masters"
+  │
+  ▼
+Click "Commodity Masters"
+  │
+  ▼
+Switch to iFrame (New Record Button)
+  │
+  ▼
+Click "New Record"
+  │
+  ▼
+Switch to iFrame (Commodity Form)
+  │
+  ▼
+Enter "TEST6" in Name
+  │
+  ▼
+Enter "T6" in Code
+  │
+  ▼
+Click Submit
+  │
+  ▼
+Commodity Saved Successfully
+  │
+  ▼
+Close Browser
+  │
+  ▼
+End
+
+

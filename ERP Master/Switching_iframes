@@ -1,0 +1,44 @@
+def switch_frames(self, element_id):
+    """Switches to the correct iframe containing the specified element."""
+    driver = self.driver
+    driver.switch_to.default_content()
+
+    for iframe in driver.find_elements(By.TAG_NAME, "iframe"):
+        driver.switch_to.frame(iframe)
+        if driver.find_elements(By.ID, element_id):
+            return True
+        print(f"Switched to iframe containing {element_id}")
+
+        driver.switch_to.default_content()
+    print(f"Unable to locate {element_id} in any iframe!")
+    return False
+
+The selected code defines a method called `switch_to_iframe` within the `ItemMasterTest` class.
+This method is designed to switch the WebDriver's focus to the correct iframe that contains a specified element.
+Here's a breakdown of how it works:
+
+1. The method takes an `element_id` as a parameter, which is the ID of the element we're looking for within an iframe.
+
+2. It starts by switching to the default content of the page using `driver.switch_to.default_content()`.
+This ensures we're starting from the top-level document.
+
+3. The method then iterates through all iframe elements on the page using
+`driver.find_elements(By.TAG_NAME, "iframe")`.
+
+4. For each iframe:
+   - It switches the driver's focus to that iframe using `driver.switch_to.frame(iframe)`.
+   - It checks if the element with the specified `element_id` exists within this iframe using
+     `driver.find_elements(By.ID, element_id)`.
+   - If the element is found, the method returns `True`, indicating success.
+   - If the element is not found, it switches back to the default content using
+     `driver.switch_to.default_content()` and continues to the next iframe.
+
+5. If the element is not found in any iframe, the method returns `False`.
+
+This method is useful when dealing with web applications that use multiple iframes,
+as it allows the test to automatically find and switch to the correct iframe containing the desired element.
+This is particularly helpful in cases where the structure of iframes might change or when dealing with dynamically loaded content.
+
+In the context of the `test_item_master` method, this `switch_to_iframe` method is called multiple times to ensure
+that the WebDriver is focused on the correct iframe before interacting with elements like buttons, input fields,
+and dropdowns.

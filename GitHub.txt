@@ -1,0 +1,36 @@
+Add Remote repo in Pycharm
+
+✅ Step 1: Check Existing Remotes
+git remote remove origin
+
+If it gives an error, check existing remotes:
+git remote -v
+
+Then remove using:
+git remote remove <remote_name>
+
+✅ Step 2:. Add the New Remote:
+git remote add origin https://github.com/omkarkadam16/ERP9AutomationTesting.git
+
+✅ Step 3:Stage & Commit (if not done already):
+git add .
+git commit -m "Initial commit for ERP9AutomationTesting"
+
+✅ Step 4:  Push to GitHub:
+git push -u origin main
+Add Password and Username
+or
+✅Using SSH for Git Authentication (Instead of Username and Password):
+✅ Step 1:Generate SSH Key Pair: You can generate an SSH key pair by using the following command:
+ssh-keygen -t ed25519 -C "omkarkadam16@gmail.com"
+
+✅ Step 2: Copy the SSH Public Key (ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAuhbz/qay1F3BheyDgZndFuJAEqeJ+vOPy+u1fhUvYc omkarkadam16@gmail.com)
+
+✅ Step 3: Verify the SSH Key
+ssh -T git@github.com
+If everything is set up correctly, you should see a message like:
+
+
+
+
+
