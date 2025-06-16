@@ -1,0 +1,18 @@
+from LoginPage import LoginPage  # Import the LoginPage class
+import unittest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+
+class VendorMaster(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        cls.driver.maximize_window()
+        cls.wait = WebDriverWait(cls.driver, 10)
+    def test_customer(self):
+        driver = self.driver
+        driver.get("http://192.168.0.72/Rlogic9UataScript?ccode=UATASCRIPT")
+        login_page = LoginPage(driver)
+        login_page.login("admin", "Omsgn9")

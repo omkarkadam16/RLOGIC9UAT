@@ -1,0 +1,25 @@
+Best PC Configuration for Selenium with Python
+
+1)Processor (CPU)
+
+Intel Core i7 (12th/13th/14th Gen) or AMD Ryzen 7 (7000 Series or newer)
+
+Faster execution for multi-threaded tests
+
+Supports virtualization for running multiple browsers
+
+2)Memory (RAM)
+
+16GB DDR4/DDR5 (Minimum) | 32GB (For Heavy Parallel Testing)
+
+Allows multiple browser instances to run smoothly
+
+Prevents memory bottlenecks when using WebDriver
+
+3)Storage (SSD)
+
+512GB NVMe SSD (Minimum) | 1TB NVMe SSD (Recommended)
+
+Faster test execution and loading times
+
+Quick read/write for test data files
