@@ -8,7 +8,6 @@ import unittest, time
 import selenium.common.exceptions as ex
 from webdriver_manager.chrome import ChromeDriverManager
 
-
 class Indent(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

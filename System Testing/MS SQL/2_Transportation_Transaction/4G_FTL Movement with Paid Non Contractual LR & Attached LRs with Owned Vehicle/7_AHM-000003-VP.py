@@ -10,7 +10,6 @@ import time
 import selenium.common.exceptions as ex
 from webdriver_manager.chrome import ChromeDriverManager
 
-
 class Payment(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

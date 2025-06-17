@@ -13,7 +13,6 @@ data = {
     "YearCode": ["2023 - 2024", "2023 - 2024"],
 }
 
-
 df = pd.DataFrame(data)
 df.to_excel("UID 1.xlsx", index=False, engine="openpyxl")
 print("Excel file created successfully.")

@@ -11,6 +11,8 @@ import selenium.common.exceptions as ex
 from webdriver_manager.chrome import ChromeDriverManager
 
 
+
+
 class Booking2(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
