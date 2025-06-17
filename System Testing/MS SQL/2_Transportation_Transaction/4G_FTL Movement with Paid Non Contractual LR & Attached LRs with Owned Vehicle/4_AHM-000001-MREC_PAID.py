@@ -129,7 +129,7 @@ class MoneyReceipt(unittest.TestCase):
                 self.select_dropdown(By.ID, "OrganizationId", "AHMEDABAD")
                 time.sleep(1)
                 # Calendar
-                self.send_keys(By.ID, "DocumentDate", "02-06-2024")
+                self.send_keys(By.ID, "DocumentDate", "04-04-2025")
 
             # Operation Bill Reference Info
             self.click_element(By.ID, "btn_Pick_OperationaBillReference")

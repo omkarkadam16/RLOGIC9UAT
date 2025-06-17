@@ -154,17 +154,17 @@ class LHC(unittest.TestCase):
             # Calendar
             self.click_element(By.ID, "DocumentDate")
             self.select_dropdown(
-                By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Jun"
+                By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Apr"
             )
             self.select_dropdown(
-                By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2024"
+                By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2025"
             )
-            self.click_element(By.XPATH, "//a[text()='2']")
+            self.click_element(By.XPATH, "//a[text()='4']")
             time.sleep(1)
 
         # Route Details
         self.auto_select(By.ID, "ServiceNetworkId-select", "DELHI")
-        self.send_keys(By.ID, "ScheduleTime", "02-06-2024")
+        self.send_keys(By.ID, "ScheduleTime", "04-04-2025")
         self.click_element(By.ID, "btnSave-VehicleTripRouteVehicleTripSessionName661")
         self.select_dropdown(
             By.ID, "VehiclePlacementId", "AHM-000001-Vehicle Placement"
@@ -175,7 +175,7 @@ class LHC(unittest.TestCase):
         self.select_dropdown(
             By.ID, "VehiclePlacementId", "AHM-000001-Vehicle Placement"
         )
-        time.sleep(2)
+        time.sleep(3)
 
         # Hire Details
         self.click_element(By.ID, "IsMarketDriver")
@@ -196,6 +196,9 @@ class LHC(unittest.TestCase):
         self.click_element(By.ID, "FreightUnitId")
         time.sleep(2)
         self.handle_alert()
+        time.sleep(1)
+
+        # Payment Details
 
         if self.switch_frames("OrganizationalLocationId-select"):
             self.auto_select(By.ID, "OrganizationalLocationId-select", "DELHI")

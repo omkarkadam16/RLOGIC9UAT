@@ -128,20 +128,20 @@ class Indent(unittest.TestCase):
                 # Calendar
                 self.click_element(By.ID, "DocumentDate")
                 self.select_dropdown(
-                    By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Jun"
+                    By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Apr"
                 )
                 self.select_dropdown(
-                    By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2024"
+                    By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2025"
                 )
-                self.click_element(By.XPATH, "//a[text()='2']")
+                self.click_element(By.XPATH, "//a[text()='4']")
 
             # Indent Details
             self.select_dropdown(By.ID, "VehicleIndentTypeId", "Non-Contractual")
             self.select_dropdown(By.ID, "CommChannelId", "Phone")
-            self.send_keys(By.ID, "VehicleRequiredOn", "02-06-2024")
+            self.send_keys(By.ID, "VehicleRequiredOn", "04-04-2025")
             self.select_dropdown(By.ID, "VehicleTypeId", "20 MT")
             self.send_keys(By.ID, "VehicleCount", "1")
-            self.send_keys(By.ID, "ExpiryDate", "05-06-2025")
+            self.send_keys(By.ID, "ExpiryDate", "04-04-2025")
             self.autocomplete_select(By.ID, "FromServiceNetworkId-select", "AHMEDABAD")
             self.autocomplete_select(By.ID, "ToServiceNetworkId-select", "DELHI")
             self.autocomplete_select(By.ID, "TransportItemId-select", "Cotton")

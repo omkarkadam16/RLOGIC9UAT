@@ -128,7 +128,7 @@ class MoneyReceipt(unittest.TestCase):
                 self.select_dropdown(By.ID, "OrganizationId", "DELHI")
                 time.sleep(1)
                 # Calendar
-                self.send_keys(By.ID, "DocumentDate", "01-06-2024")
+                self.send_keys(By.ID, "DocumentDate", "03-04-2025")
 
             # Customer Info
             if self.switch_frames("CustomerId-select"):

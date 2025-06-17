@@ -134,12 +134,12 @@ class Payment(unittest.TestCase):
                 # Calendar
                 self.click_element(By.ID, "DocumentDate")
                 self.select_dropdown(
-                    By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Jun"
+                    By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Apr"
                 )
                 self.select_dropdown(
-                    By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2024"
+                    By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2025"
                 )
-                self.click_element(By.XPATH, "//a[text()='2']")
+                self.click_element(By.XPATH, "//a[text()='4']")
 
             # general Details
             self.autocomplete_select(By.ID, "VehicleId-select", "MH04AA7007")

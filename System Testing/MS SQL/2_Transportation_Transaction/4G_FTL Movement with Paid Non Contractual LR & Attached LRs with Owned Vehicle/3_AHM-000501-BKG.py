@@ -131,12 +131,12 @@ class Booking(unittest.TestCase):
             # Calendor
             self.click_element(By.ID, "DocumentDate")
             self.select_dropdown(
-                By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Jun"
+                By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Apr"
             )
             self.select_dropdown(
-                By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2024"
+                By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2025"
             )
-            self.click_element(By.XPATH, "//a[text()='2']")
+            self.click_element(By.XPATH, "//a[text()='4']")
 
         # Booking Details
         self.select_dropdown(By.ID, "FreightOnId", "Fixed")
@@ -170,7 +170,7 @@ class Booking(unittest.TestCase):
 
         # Invoice Details
         self.send_keys(By.ID, "InvoiceNo", "1")
-        self.send_keys(By.ID, "InvoiceDate", "02-06-2024")
+        self.send_keys(By.ID, "InvoiceDate", "04-04-2025")
         self.send_keys(By.ID, "InvoiceValue", "1")
         self.click_element(By.ID, "btnSave-BookingInvoiceSession633")
         time.sleep(1)
