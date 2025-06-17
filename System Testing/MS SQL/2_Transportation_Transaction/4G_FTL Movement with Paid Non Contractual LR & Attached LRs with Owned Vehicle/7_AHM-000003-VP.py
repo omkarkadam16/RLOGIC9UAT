@@ -16,7 +16,6 @@ class Payment(unittest.TestCase):
         cls.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         cls.driver.maximize_window()
         cls.wait = WebDriverWait(cls.driver, 15)
-
     def click_element(self, by, value, retry=2):
         for i in range(retry):
             try:
