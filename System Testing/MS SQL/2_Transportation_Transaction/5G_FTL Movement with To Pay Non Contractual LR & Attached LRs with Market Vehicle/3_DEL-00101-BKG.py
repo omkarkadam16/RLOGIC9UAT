@@ -128,15 +128,11 @@ class Booking(unittest.TestCase):
         if self.switch_frames("OrganizationId"):
             self.select_dropdown(By.ID, "OrganizationId", "DELHI")
             self.select_dropdown(By.ID, "SeriesId", "DELHI - 101 To 500")
-            # Calendor
-            self.click_element(By.ID, "DocumentDate")
-            self.select_dropdown(
-                By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Jun"
-            )
-            self.select_dropdown(
-                By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2024"
-            )
-            self.click_element(By.XPATH, "//a[text()='2']")
+            # Calendar
+            self.click_element(By.CLASS_NAME, "ui-datepicker-trigger")
+            self.select_dropdown(By.CLASS_NAME, "ui-datepicker-month", "Apr")
+            self.select_dropdown(By.CLASS_NAME, "ui-datepicker-year", "2025")
+            self.click_element(By.XPATH, "//a[text()='5']")
 
         # Booking Details
         self.select_dropdown(By.ID, "FreightOnId", "Fixed")

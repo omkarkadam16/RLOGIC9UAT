@@ -139,6 +139,7 @@ class Payment(unittest.TestCase):
                 )
                 self.click_element(By.XPATH, "//a[text()='4']")
 
+
             # general Details
             self.autocomplete_select(By.ID, "VehicleId-select", "MH04AA7007")
             self.click_element(By.ID, "btnSave-VendorPaymentOnSession780")

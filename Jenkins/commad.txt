@@ -5,3 +5,8 @@ http://localhost:9090
 cd "C:\Users\user\Desktop\Omkar Kadam_selenium\System Testing\MYSQL\1_Masters\1_Organizational Hierarchy"
 
 python 1_Division.py
+
+
+http://localhost:8080
+Omkar1610
+Om12345@

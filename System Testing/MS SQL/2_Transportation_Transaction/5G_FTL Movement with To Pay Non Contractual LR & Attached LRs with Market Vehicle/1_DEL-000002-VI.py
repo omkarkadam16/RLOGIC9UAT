@@ -125,14 +125,14 @@ class Indent(unittest.TestCase):
                 self.select_dropdown(By.ID, "OrganizationId", "DELHI")
                 # Calendar
                 self.click_element(By.CLASS_NAME, "ui-datepicker-trigger")
-                self.select_dropdown(By.CLASS_NAME, "ui-datepicker-month", "Jun")
-                self.select_dropdown(By.CLASS_NAME, "ui-datepicker-year", "2024")
-                self.click_element(By.XPATH, "//a[text()='2']")
+                self.select_dropdown(By.CLASS_NAME, "ui-datepicker-month", "Apr")
+                self.select_dropdown(By.CLASS_NAME, "ui-datepicker-year", "2025")
+                self.click_element(By.XPATH, "//a[text()='5']")
 
             # Indent Details
             self.select_dropdown(By.ID, "VehicleIndentTypeId", "Non-Contractual")
             self.select_dropdown(By.ID, "CommChannelId", "Email")
-            self.send_keys(By.ID, "VehicleRequiredOn", "02-06-2024")
+            self.send_keys(By.ID, "VehicleRequiredOn", "05-04-2025")
             self.select_dropdown(By.ID, "VehicleTypeId", "20 MT")
             self.send_keys(By.ID, "VehicleCount", "1")
             self.send_keys(By.ID, "ExpiryDate", "05-06-2025")

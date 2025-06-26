@@ -68,11 +68,11 @@ class TripSettlement(unittest.TestCase):
     def select_dropdown(self, by, value, text):
         try:
             e = self.wait.until(EC.element_to_be_clickable((by, value)))
-            e.is_enabled()
             e.click()
             print("[SUCCESS] Clicked dropdown")
             self.wait.until(EC.visibility_of_element_located((by, value)))
             element = Select(self.driver.find_element(by, value))
+            time.sleep(1)
             element.select_by_visible_text(text)
             print(f"[SUCCESS] Selected dropdown option: {text}")
             return True
@@ -130,12 +130,12 @@ class TripSettlement(unittest.TestCase):
                 # Calendar
                 self.click_element(By.ID, "DocumentDate")
                 self.select_dropdown(
-                    By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Jun"
+                    By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Apr"
                 )
                 self.select_dropdown(
-                    By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2024"
+                    By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2025"
                 )
-                self.click_element(By.XPATH, "//a[text()='2']")
+                self.click_element(By.XPATH, "//a[text()='4']")
 
             # General
             self.autocomplete_select(By.ID, "VehicleId-select", "MH04AA7007")
