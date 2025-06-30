@@ -124,14 +124,10 @@ class Contract(unittest.TestCase):
             if self.switch_frames("OrganizationId"):
                 self.select_dropdown(By.ID, "OrganizationId", "DELHI")
                 # Calendar
-                self.click_element(By.ID, "DocumentDate")
-                self.select_dropdown(
-                    By.XPATH, "(//select[@class='ui-datepicker-month'])[1]", "Jun"
-                )
-                self.select_dropdown(
-                    By.XPATH, "(//select[@class='ui-datepicker-year'])[1]", "2024"
-                )
-                self.click_element(By.XPATH, "//a[text()='4']")
+                self.click_element(By.CLASS_NAME, "ui-datepicker-trigger")
+                self.select_dropdown(By.CLASS_NAME, "ui-datepicker-month", "Apr")
+                self.select_dropdown(By.CLASS_NAME, "ui-datepicker-year", "2025")
+                self.click_element(By.XPATH, "//a[text()='6']")
 
                 # Basic Information
                 self.send_keys(By.ID, "ContractNo", "Bharat - 001")
@@ -139,8 +135,8 @@ class Contract(unittest.TestCase):
                 self.autocomplete_select(
                     By.ID, "ContractLocationId-select", "Head Office"
                 )
-                self.send_keys(By.ID, "FromDate", "04-06-2024")
-                self.send_keys(By.ID, "ToDate", "04-06-2025")
+                self.send_keys(By.ID, "FromDate", "06-04-2025")
+                self.send_keys(By.ID, "ToDate", "06-04-2025")
 
                 driver.execute_script("window.scrollTo(0, 0);")
                 time.sleep(2)
