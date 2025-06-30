@@ -139,6 +139,7 @@ class Listing(unittest.TestCase):
                 )
                 self.click_element(By.XPATH, "//a[text()='2']")
 
+
                 # Receipt Info
                 self.send_keys(By.ID, "ReceivedPkg", "1")
                 self.send_keys(By.ID, "ReceivedWeight", "2")
