@@ -150,7 +150,9 @@ class ServiceNetwork(unittest.TestCase):
 
         self.click_element(By.ID,"add1")
         time.sleep(1)
+
         #driver.execute_script("window.scrollBy(0, 500);")
+
         self.click_element(By.ID,"btnSaveForm")
         time.sleep(2)
 
