@@ -4,7 +4,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import unittest
@@ -87,12 +86,12 @@ class TestCustomer(unittest.TestCase):
             print(f"Typed '{text}' in autocomplete input")
             # Wait for the results to appear (List Class name)
             self.wait.until(
-                EC.presence_of_element_located((By.CLASS_NAME, "select2-results__option"))
+                EC.presence_of_element_located((By.CLASS_NAME, "select2-selection__rendered"))
             )
             # Get all matching options
-            options = self.driver.find_elements(By.CLASS_NAME, "select2-results__option")
+            options = self.driver.find_elements(By.CLASS_NAME, "select2-selection__rendered")
             for option in options:
-                if text.upper() in option.text.strip().upper():
+                if text.lower() in option.text.strip().lower():
                     option.click()
                     print("Selected autocomplete option:", option.text.strip())
                     return True
@@ -102,7 +101,8 @@ class TestCustomer(unittest.TestCase):
             print("Fallback: selected autocomplete option with keyboard")
             return True
 
-        except(ex.ElementClickInterceptedException, ex.StaleElementReferenceException, ex.TimeoutException):
+        except Exception as e:
+            print(f"[ERROR] Autocomplete selection failed for '{text}':", e)
             return False
 
     def test_vendor(self):
@@ -123,21 +123,22 @@ class TestCustomer(unittest.TestCase):
         time.sleep(2)
 
         #GST
-        self.send_keys(By.ID,"txtGstNumber","27AAACB9318D1ZW")
+        self.send_keys(By.ID,"txtGstNumber","27AAACJ4323N1ZG")
         time.sleep(1)
         self.click_element(By.ID,"gstEKycButton")
 
         # PAN
-        self.send_keys(By.ID,"txtPanNumber","AAACB9318D")
+        self.send_keys(By.ID,"txtPanNumber","AAACJ4323N")
         time.sleep(1)
         self.click_element(By.ID,"panEKycButton")
 
-        self.send_keys(By.ID, "txtVendorName", "ADITYA BIRLA MANAGEMENT CORPORATION PVT LTD")
-        self.select_dropdown(By.ID, "select2-ddlVendorCategory-container", "Owner")
+        self.send_keys(By.ID, "txtVendorName", "JSW STEEL LIMITED")
+        time.sleep(1)
+        self.select_dropdown(By.ID, "select2-ddlVendorCategory-container", "OWNER")
         self.send_keys(By.ID, "txtEmailId", "omkar@gmail.com")
         self.send_keys(By.ID, "txtAddress", "ABC Text")
         time.sleep(1)
-        self.select_dropdown(By.ID,"select2-ddlCity-container","Chakan")
+        self.select_dropdown(By.ID,"select2-ddlCity-container","AHMEDABAD")
         self.send_keys(By.ID, "txtContactPerson", "Rohit Sharma")
         self.send_keys(By.ID, "txtPinCode", "123456")
         self.send_keys(By.ID, "txtMobileNumber", "5282752134")
