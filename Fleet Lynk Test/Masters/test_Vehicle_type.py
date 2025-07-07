@@ -1,6 +1,5 @@
-
-from selenium.webdriver import Keys
 from selenium import webdriver
+from selenium.webdriver import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -11,10 +10,9 @@ import time
 import selenium.common.exceptions as ex
 from webdriver_manager.chrome import ChromeDriverManager
 
-class TestCustomer(unittest.TestCase):
+class VehicleType(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-
         options = Options()
         options.add_argument('--ignore-certificate-errors')
         options.add_argument('--allow-insecure-localhost')
@@ -31,20 +29,18 @@ class TestCustomer(unittest.TestCase):
         }
         options.add_experimental_option("prefs", prefs)
 
-        cls.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
+        cls.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         cls.driver.maximize_window()
-        cls.wait = WebDriverWait(cls.driver,10)
+        cls.wait = WebDriverWait(cls.driver, 15)
 
-    def click_element(self,by,value,retry = 3):
+    def click_element(self,by,value,retry = 2):
         for i in range(retry):
             try:
                 self.wait.until(EC.element_to_be_clickable((by,value))).click()
                 return True
-
-            except(ex.ElementClickInterceptedException,
-                    ex.StaleElementReferenceException,
-                    ex.TimeoutException):
-                print(f"Attempts{i+1}/{retry}")
+            except(ex.ElementClickInterceptedException,ex.StaleElementReferenceException,ex.TimeoutException):
+                print(f"Attempt{i+1}/{retry}")
+                time.sleep(1)
         try:
             a = self.driver.find_element(by, value)
             self.driver.execute_script("arguments[0].click();",a)
@@ -54,7 +50,6 @@ class TestCustomer(unittest.TestCase):
 
     def send_keys(self,by,value,text):
         try:
-            self.click_element(by,value)
             i = self.wait.until(EC.element_to_be_clickable((by,value)))
             i.clear()
             i.send_keys(text)
@@ -62,14 +57,14 @@ class TestCustomer(unittest.TestCase):
         except(ex.ElementClickInterceptedException,ex.StaleElementReferenceException,ex.TimeoutException):
             return False
 
-    def switch_frames(self, value):
+    def switch_frames(self,value):
         driver = self.driver
         driver.switch_to.default_content()
-        iframes = driver.find_elements(By.TAG_NAME, "iframe")
+        iframes = driver.find_elements(By.TAG_NAME,"iframe")
         for i in iframes:
             driver.switch_to.frame(i)
             try:
-                if driver.find_element(By.ID, value):
+                if driver.find_element(By.ID,value):
                     return True
             except ex.TimeoutException:
                 driver.switch_to.default_content()
@@ -86,10 +81,10 @@ class TestCustomer(unittest.TestCase):
             print(f"Typed '{text}' in autocomplete input")
             # Wait for the results to appear (List Class name)
             self.wait.until(
-                EC.presence_of_element_located((By.CLASS_NAME, "select2-results__options"))
+                EC.presence_of_element_located((By.CLASS_NAME, "select2-selection__rendered"))
             )
             # Get all matching options
-            options = self.driver.find_elements(By.CLASS_NAME, "select2-results__options")
+            options = self.driver.find_elements(By.CLASS_NAME, "select2-selection__rendered")
             for option in options:
                 if text.lower() in option.text.strip().lower():
                     option.click()
@@ -105,7 +100,7 @@ class TestCustomer(unittest.TestCase):
             print(f"[ERROR] Autocomplete selection failed for '{text}':", e)
             return False
 
-    def test_vendor(self):
+    def test_vehicle_type(self):
         driver = self.driver
         driver.get("https://win-8tcj8ivog5i:7265/")
 
@@ -114,39 +109,17 @@ class TestCustomer(unittest.TestCase):
         self.send_keys(By.ID, "Password", "Demo@123")
         self.click_element(By.ID, "loginButton")
         print("Login successful.")
-        time.sleep(2)
 
         self.click_element(By.LINK_TEXT, "Master")
-        self.click_element(By.LINK_TEXT, "Vendor")
-        self.switch_frames("addVendor")
-        self.click_element(By.ID, "addVendor")
+        self.click_element(By.LINK_TEXT, "Vehicle Type")
+
+        self.switch_frames("btnAddVehicleType")
+        self.click_element(By.ID, "btnAddVehicleType")
+        self.switch_frames("txtVehicleType")
         time.sleep(2)
+        self.send_keys(By.ID,"txtVehicleType","Sedan")
+        self.send_keys(By.ID,"txtminKmsPerDay","200")
 
-        #GST
-        self.send_keys(By.ID,"txtGstNumber","27AAACJ4323N1ZG")
+        self.click_element(By.ID,"btnSaveVehicleType")
         time.sleep(1)
-        self.click_element(By.ID,"gstEKycButton")
-
-        # PAN
-        self.send_keys(By.ID,"txtPanNumber","AAACJ4323N")
-        time.sleep(1)
-        self.click_element(By.ID,"panEKycButton")
-
-        self.send_keys(By.ID, "txtVendorName", "JSW STEEL LIMITED")
-        time.sleep(1)
-        self.select_dropdown(By.ID, "select2-ddlVendorCategory-container", "OWNER")
-        self.send_keys(By.ID, "txtEmailId", "omkar@gmail.com")
-        self.send_keys(By.ID, "txtAddress", "ABC Text")
-        time.sleep(1)
-        self.select_dropdown(By.ID,"select2-ddlCity-container","AHMEDABAD")
-        self.send_keys(By.ID, "txtContactPerson", "Rohit Sharma")
-        self.send_keys(By.ID, "txtPinCode", "123456")
-        self.send_keys(By.ID, "txtMobileNumber", "5282752134")
-        self.send_keys(By.ID, "txtWhatsappNumber", "7284352134")
-
-        self.click_element(By.XPATH,"(//span[@class='checkmark'])[1]")
-        self.click_element(By.XPATH, "(//span[@class='checkmark'])[2]")
-
-        self.click_element(By.ID,"btnSaveVendor")
-        time.sleep(2)
-
+        print("Vehicle type added successfully")
