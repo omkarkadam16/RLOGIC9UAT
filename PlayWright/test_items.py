@@ -6,11 +6,11 @@ def test_playwright(): # 👈 define the test
         context = browser.new_context(ignore_https_errors=True)  # 👈 ignore SSL cert errors here
         page = context.new_page() # 👈 create a new page
 
-        page.goto("url") # 👈 navigate to the page
+        page.goto("https://win-8tcj8ivog5i:7265/") # 👈 navigate to the page
         print(page.title()) # 👈 print the page title
 
         #Login Page
-        page.fill('id="EmailId', "demo123@gmail.com")
+        page.fill('#EmailId', "demo123@gmail.com")
         print("Email Enter Successfully")
         page.locator('input[id="Password"]').fill("Demo@123")
         print("Text entered")
