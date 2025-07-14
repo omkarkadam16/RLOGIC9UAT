@@ -38,11 +38,12 @@ class Placement(unittest.TestCase):
             element = self.driver.find_element(by, value)
             self.driver.execute_script("arguments[0].click();", element)
             return True
-        except:
+        except ex.JavascriptException:
             return False
 
     def switch_frames(self, element_id):
         driver = self.driver
+        driver.switch_to.default_content()
         driver.switch_to.default_content()
         iframes = driver.find_elements(By.TAG_NAME, "iframe")
         for iframe in iframes:
@@ -54,8 +55,8 @@ class Placement(unittest.TestCase):
                 driver.switch_to.default_content()
         return False
 
-    def send_keys(self, by, value, text):
-        for retry in range(3):
+    def send_keys(self, by, value, text,retry=2):
+        for i in range(retry):
             try:
                 element = self.wait.until(EC.visibility_of_element_located((by, value)))
                 element.clear()
@@ -67,11 +68,13 @@ class Placement(unittest.TestCase):
                 ex.StaleElementReferenceException,
                 ex.TimeoutException,
             ):
-                print(f"Element not found: {value}")
+                print(
+                    f"Retrying click on {by} with value {value}, attempt {i + 1}/{retry}"
+                )
         return False
 
-    def select_dropdown(self, by, value, text):
-        for retry in range(2):
+    def select_dropdown(self, by, value, text,retry=2):
+        for i in range(retry):
             try:
                 e = self.wait.until(EC.element_to_be_clickable((by, value)))
                 e.is_enabled()
@@ -87,7 +90,9 @@ class Placement(unittest.TestCase):
                 ex.NoSuchElementException,
                 ex.TimeoutException,
             ):
-                print(f"[RETRY] exception occurred for {value}, retrying...")
+                print(
+                    f"Retrying click on {by} with value {value}, attempt {i + 1}/{retry}"
+                )
         return False
 
     def autocomplete_select(self, by, value, text):
